@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            font-family: 'Times New Roman', Times, serif;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        /* ── HEADER ── */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 60px;
+            background-color: rgba(0, 0, 0, 0.92);
+        }
+
+        header span.logo {
+            font-weight: bold;
+            font-size: 2em;
+            color: white;
+        }
+
+        .orange {
+            color: #ff7300;
+        }
+
+        /* Burger button */
+        .navbar-toggler {
+            border-color: #ff7300;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,115,0,1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        .navigation ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            font-size: 1em;
+            padding-bottom: 4px;
+        }
+
+        .navigation a:hover {
+            color: #ff7300;
+        }
+
+        /* Mobile nav collapse */
+        @media (max-width: 768px) {
+            header {
+                flex-wrap: wrap;
+                padding: 10px 20px;
+                position: relative;
+            }
+
+            .navigation {
+                width: 100%;
+                overflow: hidden;
+                max-height: 0;
+                transition: max-height 0.35s ease;
+            }
+
+            .navigation.open {
+                max-height: 300px;
+            }
+
+            .navigation ul {
+                flex-direction: column;
+                gap: 12px;
+                padding: 14px 0 6px;
+            }
+
+            .burger-btn {
+                display: flex !important;
+            }
+        }
+
+        .burger-btn {
+            display: none;
+            background: none;
+            border: 2px solid #ff7300;
+            border-radius: 6px;
+            padding: 5px 10px;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .burger-btn span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: #ff7300;
+            font-size: inherit;
+            font-weight: normal;
+        }
+
+        /* ── HERO SECTION ── */
+        .Description {
+            background-color: #000;
+            padding: 60px 60px 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 92vh;
+        }
+
+        .description {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            width: 100%;
+        }
+
+        .description h4 {
+            font-size: 1em;
+            font-weight: 600;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .description h2 {
+            font-size: clamp(2em, 5vw, 4em);
+            font-weight: 700;
+            color: white;
+            line-height: 1.2;
+        }
+
+        .Haute span {
+            font-size: clamp(1.2em, 3vw, 2em);
+            color: white;
+            font-weight: bold;
+        }
+
+        p {
+            text-align: justify;
+            color: white;
+            font-size: 1em;
+            width: 80%;
+        }
+
+        h3 {
+            color: rgb(255, 115, 0);
+        }
+
+        .image img {
+            width: clamp(220px, 30vw, 640px);
+            height: clamp(220px, 30vw, 640px);
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        /* ── SOCIAL ICONS ── */
+        .social-icons {
+            display: flex;
+            gap: 14px;
+            padding: 10px 0;
+        }
+
+        .social-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: transform .2s;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        .social-icon.fb,
+        .social-icon.tw,
+        .social-icon.ig {
+            background: rgb(255, 115, 0);
+            color: black;
+        }
+
+        /* ── BUTTON ── */
+        .PLUS a,
+        .btn a {
+            display: inline-block;
+            background-color: #ff7300;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            padding: 11px 28px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 2px solid #ff7300;
+            transition: background .2s, color .2s;
+        }
+
+        .PLUS a:hover,
+        .btn a:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        /* ── ABOUT SECTION ── */
+        .contenu-2 {
+            display: flex;
+            text-align: center;
+            background-color: #111;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            padding: 60px 20px;
+        }
+
+        .contenu-2 h1 {
+            font-size: clamp(1.8em, 4vw, 3em);
+            color: white;
+        }
+
+        .contenu-2 span {
+            color: #ff7300;
+        }
+
+        .About {
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .About img {
+            border-radius: 50%;
+            object-fit: cover;
+            height: 200px;
+            width: 200px;
+        }
+
+        .About p {
+            font-size: 1em;
+            color: white;
+            width: 100%;
+            line-height: 1.5;
+        }
+
+        /* ── SKILLS SECTION ── */
+        .bas {
+            display: flex;
+            background-color: #000;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            padding: 60px 20px;
+        }
+
+        .bas h1 {
+            font-size: clamp(1.8em, 4vw, 2em);
+            color: white;
+        }
+
+        .bas span {
+            color: #ff7300;
+        }
+
+        .bas ul {
+            display: flex;
+            flex-direction: column;
+            list-style: none;
+            gap: 30px;
+            width: 100%;
+            max-width: 700px;
+            padding: 10px 0;
+        }
+
+        .L1, .L2, .L3, .L4 {
+            background-color: white;
+            width: 100%;
+            height: 20px;
+            border-radius: 20px;
+            margin-top: 6px;
+        }
+
+        .L1 div, .L2 div, .L3 div, .L4 div {
+            background-color: #FE4902;
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .L1 div { width: 95%; }
+        .L2 div { width: 50%; }
+        .L3 div { width: 70%; }
+        .L4 div { width: 55%; }
+
+        /* ── RESPONSIVE ADJUSTMENTS ── */
+        @media (max-width: 991px) {
+            .Description {
+                padding: 50px 30px;
+                min-height: auto;
+            }
+
+            p {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 10px 20px;
+            }
+
+            .Description {
+                padding: 40px 20px;
+                text-align: center;
+            }
+
+            .description {
+                align-items: center;
+            }
+
+            .Haute {
+                text-align: center;
+            }
+
+            p {
+                width: 100%;
+                text-align: center;
+            }
+
+            .social-icons {
+                justify-content: center;
+            }
+
+            .image {
+                margin-top: 30px;
+                display: flex;
+                justify-content: center;
+            }
+
+            .About p {
+                width: 100%;
+            }
+
+            .bas ul {
+                width: 100%;
+                padding: 0 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header span.logo {
+                font-size: 1.4em;
+            }
+
+            .description h2 {
+                font-size: 2em;
+            }
+
+            .Haute span {
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="contenu">
+
+        <!-- ══ HEADER ══ -->
+        <header>
+            <span class="logo"><span class="orange">A</span>lexandre</span>
+
+            <!-- Burger pour mobile -->
+            <button class="burger-btn" id="burgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <div class="navigation" id="navMenu">
+                <ul>
+                    <li class="home-line"><a href="">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="">Services</a></li>
+                    <li><a href="#skill">Portfolio</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <!-- ══ HERO ══ -->
+        <section class="Description">
+            <div class="container-fluid px-0">
+                <div class="row align-items-center gy-4">
+
+                    <!-- Texte -->
+                    <div class="col-12 col-lg-7">
+                        <div class="description">
+                            <div class="Haute">
+                                <span>je suis</span>
+                                <h2>Alexandre Ola</h2>
+                                <h3>Full-stack web developer</h3>
+                            </div>
+
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Eos doloremque, laborum aperiam aut aspernatur alias numquam iure
+                                obcaecati asperiores quae similique tempora beatae quia repellendus ab neque?
+                                Vel, dolores architecto.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                                Eos doloremque, laborum aperiam aut aspernatur alias numquam iure
+                                obcaecati asperiores quae similique tempora beatae quia repellendus ab neque?
+                                Vel, dolores architecto.
+                            </p>
+
+                            <div class="PLUS">
+                                <a href="">voir plus</a>
+                            </div>
+
+                            <div class="social-icons">
+                                <a href="#" class="social-icon fb"><i class="fa-brands fa-facebook-f"></i></a>
+                                <a href="#" class="social-icon tw"><i class="fa-brands fa-twitter"></i></a>
+                                <a href="#" class="social-icon ig"><i class="fa-brands fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Image -->
+                    <div class="col-12 col-lg-5 d-flex justify-content-center">
+                        <div class="image">
+                            <img src="Image Portfolio/image.png" alt="Profil">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ══ ABOUT ══ -->
+        <div class="contenu-2">
+            <div class="About container">
+                <h1 id="about"><span>A propos de</span> moi</h1>
+                <img src="Image Portfolio/image.png" alt="Profil">
+                <h3>Full-stack web developer</h3>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                            Neque perspiciatis tempore nostrum adipisci temporibus hic nulla vel,
+                            praesentium voluptatibus blanditiis eaque autem exercitationem.
+                            Ipsam id natus ad maiores officiis veniam.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="btn">
+                <a href="">Hire me</a>
+            </div>
+        </div>
+
+        <!-- ══ SKILLS ══ -->
+        <section class="bas">
+            <h1 id="skill">My <span>skill</span></h1>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8">
+                        <ul>
+                            <li>
+                                HTML
+                                <div class="L1"><div></div></div>
+                            </li>
+                            <li>
+                                CSS
+                                <div class="L2"><div></div></div>
+                            </li>
+                            <li>
+                                GITHUB
+                                <div class="L3"><div></div></div>
+                            </li>
+                            <li>
+                                NOTEPAD
+                                <div class="L4"><div></div></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </section>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Burger menu toggle -->
+    <script>
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu   = document.getElementById('navMenu');
+
+        burgerBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('open');
+        });
+
+        // Ferme le menu quand on clique sur un lien
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => navMenu.classList.remove('open'));
+        });
+    </script>
+</body>
+</html>
